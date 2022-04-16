@@ -178,6 +178,9 @@ class _HomeViewState extends State<HomeView> {
                 ),
                 Spacer(),
                 GestureDetector(
+                  onTap: (){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => FileChooseView(conName1: 'MP3',conName2: 'WAV',conName3:'OGG',conName4: 'FLAC',bgColor: bgColor,)));
+                  },
                   child: Column(
                     children: [
                       Container(
