@@ -593,6 +593,7 @@ class _FileChooseViewState extends State<FileChooseView> {
                     builder: (BuildContext context) => TranslateText(
                           fileText: fileText,
                           translationText: trans.toString(),
+                          sourceLang: radioVal,
                         )));
               },
               child: Container(

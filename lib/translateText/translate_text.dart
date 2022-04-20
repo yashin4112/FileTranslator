@@ -3,6 +3,7 @@ import 'package:decorated_icon/decorated_icon.dart';
 import 'package:filetranslator/filechoose/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:translator/translator.dart';
 
@@ -10,7 +11,8 @@ class TranslateText extends StatefulWidget {
 
   String fileText;
   String translationText;
-  TranslateText({ Key? key, required this.fileText, required this.translationText}) : super(key: key);
+  String sourceLang;
+  TranslateText({ Key? key, required this.fileText, required this.translationText, required this.sourceLang}) : super(key: key);
 
   @override
   State<TranslateText> createState() => _TranslateTextState();
@@ -19,6 +21,18 @@ class TranslateText extends StatefulWidget {
 class _TranslateTextState extends State<TranslateText> {
 
   final translator = GoogleTranslator();
+  FlutterTts flutterTts = FlutterTts();
+  String lang = '';
+  @override
+  void initState() {
+    if (widget.sourceLang =='HINDI') {
+      setState(() {
+        // lang = 'HI-IN';s
+      });
+    } else {
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context){
@@ -69,7 +83,12 @@ class _TranslateTextState extends State<TranslateText> {
                             children: [
                               Spacer(),
                               GestureDetector(
-                                onTap: (() {}),
+                                onTap: (()async {
+                                  Fluttertoast.showToast(msg: 'Start');
+                                  await flutterTts.setLanguage('mr-IN');
+                                  await flutterTts.setPitch(1);
+                                  await flutterTts.speak(widget.fileText);
+                                }),
                                 child: DecoratedIcon(
                                   Icons.volume_up_outlined,
                                   shadows: [
@@ -154,7 +173,11 @@ class _TranslateTextState extends State<TranslateText> {
                             children: [
                               Spacer(),
                               GestureDetector(
-                                onTap: (() {}),
+                                onTap: (() async {
+                                  await flutterTts.setLanguage('en-IN');
+                                  await flutterTts.setPitch(1);
+                                  await flutterTts.speak(widget.translationText);
+                                }),
                                 child: DecoratedIcon(
                                   Icons.volume_up_outlined,
                                   shadows: [
@@ -169,7 +192,7 @@ class _TranslateTextState extends State<TranslateText> {
                               SizedBox(width: 20,),
                               GestureDetector(
                                 onTap: (() {
-                                  Clipboard.setData(ClipboardData(text: widget.fileText));
+                                  Clipboard.setData(ClipboardData(text: widget.translationText));
                                    Fluttertoast.showToast(
                                     msg: "Translation Copied",
                                     toastLength: Toast.LENGTH_SHORT,
