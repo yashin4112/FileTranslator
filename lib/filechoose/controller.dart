@@ -61,13 +61,16 @@ class FileChooseController {
     String data;
     String source;
     if (src=='HINDI') {
-      source = 'hi-IN_Telephony';
+      source = 'hi-IN';
     } 
+    else if(src == 'MARATHI'){
+      source = 'mr-IN';
+    }
     else if(src=='CHINEESE'){
-      source='zh-CN_Telephony';
+      source='zh-CN';
     }
     else if (src=='SPANISH'){
-      source = 'es-MX_BroadbandModel';
+      source = 'es-MX';
     }
     else{
       source = 'en-IN_Telephony';
@@ -75,11 +78,10 @@ class FileChooseController {
 
     var uri = Uri(
       scheme: 'https',
-      host: 'audiorecog-api.herokuapp.com',
+      host: '199d-2402-8100-230f-497b-3c17-5556-48d0-561a.ngrok.io',
       path: '/audio-upload',
       queryParameters: {
-        'media-type':'audio/'+platformFile.extension.toString(),
-        'sourceLanguage': source.toString()
+        'language': source.toString()
       }
     );
 

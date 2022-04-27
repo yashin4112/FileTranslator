@@ -27,9 +27,28 @@ class _TranslateTextState extends State<TranslateText> {
   void initState() {
     if (widget.sourceLang =='HINDI') {
       setState(() {
-        // lang = 'HI-IN';s
+        lang = 'hi-IN';
       });
-    } else {
+    }
+    else if (widget.sourceLang =='MARATHI') {
+      setState(() {
+        lang = 'mr-IN';
+      });
+    } 
+    else if (widget.sourceLang =='CHINEESE') {
+      setState(() {
+        lang = 'zh-CN';
+      });
+    } 
+    else if (widget.sourceLang =='SPANISH') {
+      setState(() {
+        lang = 'es-MX';
+      });
+    } 
+    else {
+      setState(() {
+        lang = 'en-IN';
+      });
     }
     super.initState();
   }
@@ -84,8 +103,8 @@ class _TranslateTextState extends State<TranslateText> {
                               Spacer(),
                               GestureDetector(
                                 onTap: (()async {
-                                  Fluttertoast.showToast(msg: 'Start');
-                                  await flutterTts.setLanguage('mr-IN');
+                                  Fluttertoast.showToast(msg: 'Reading will Start Shortly');
+                                  await flutterTts.setLanguage(lang);
                                   await flutterTts.setPitch(1);
                                   await flutterTts.speak(widget.fileText);
                                 }),
