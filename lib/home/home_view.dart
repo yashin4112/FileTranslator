@@ -75,41 +75,18 @@ class _HomeViewState extends State<HomeView> {
         shadowColor: Color.fromARGB(255, 34, 32, 32),
         // backgroundColor: Colors.deepPurple.shade400,
       ),
-      // body:  IndexedStack(
-      //   children: tabwidgets,
-      //   index: currentIndex,
-      // ),
-      // backgroundColor: Colors.blueGrey.shade900,//Colors.blueGrey.shade900,
-      // bottomNavigationBar: BottomNavigationBar(
-      //   items: const [
-      //       BottomNavigationBarItem(
-      //       icon: Icon(Icons.text_fields_outlined),
-      //       label: 'Text', 
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.audiotrack_outlined),
-      //       label: 'Audio',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.settings_outlined),
-      //       label: 'Settings',
-      //     ),
-      //   ],
-      //   backgroundColor: Colors.blueGrey.shade800,
-      //   selectedItemColor: Colors.white,
-      //   unselectedItemColor: Colors.white60,
-      //   currentIndex: currentIndex,
-      //   onTap: (index){
-      //     setState(() {
-      //       currentIndex = index;
-      //     });
-      //   }, 
-      //   ),
       body: Padding(
         padding: const EdgeInsets.all(5.0),
         child: Column(
           children: [
-            
+            Spacer(),
+            Container(
+              // padding: EdgeInsets.all(10),
+              width: 530,
+              height: 530,
+              child: Image.asset(
+                bgColor == Colors. white ? 'assests/mainLogo/lightLogo.png': 'assests/mainLogo/darkLogo.png'),
+            ),
             Spacer(),
             Padding(
               padding: const EdgeInsets.all(30.0),
