@@ -36,9 +36,13 @@ class _FileChooseViewState extends State<FileChooseView> {
   var radioVal = 'HINDI';
 
   PlatformFile? file;
+  PlatformFile? file2;
 
   late String fileText;
+
   String fileName = '';
+  String tempName = '';
+  var btnText = '';
 
   @override
   Widget build(BuildContext context) {
@@ -79,18 +83,13 @@ class _FileChooseViewState extends State<FileChooseView> {
                 GestureDetector(
                   onTap: () async {
                     file = await FileChooseController.getFile(
-                        widget.conName1 == 'PDF' ? 'pdf' : 'mp3');
-                    setState(() {
-                      btnColor = const Color.fromARGB(255, 121, 229, 236);
-                      fileName = 'Reading Your File...';
+                      widget.conName1 == 'PDF' ? 'pdf' : 'mp3');
+                      setState(() {
+                        btnText = 'Read Your File';
+                        tempName = file!.name;
+                        // fileName = 'Reading Your File...';
                     });
-                    if (widget.conName1 == 'PDF') {
-                      fileText = await FileChooseController.returnFileText();
-                    } 
-                    setState(() {
-                      btnColor = Color.fromARGB(255, 3, 135, 243);
-                      fileName = (file!.name);
-                    });
+                   
                   },
                   child: Container(
                     width: 160,
@@ -163,17 +162,10 @@ class _FileChooseViewState extends State<FileChooseView> {
                 GestureDetector(
                     onTap: () async {
                       file = await FileChooseController.getFile(
-                          widget.conName2 == 'DOC' ? 'doc' : 'wav');
+                      widget.conName2 == 'DOC' ? 'doc' : 'wav');
                       setState(() {
-                        btnColor = const Color.fromARGB(255, 121, 229, 236);
-                        fileName = 'Reading Your File...';
-                      });
-                      if (widget.conName2=='DOC') {
-                        fileText = await FileChooseController.returnFileText();
-                      }
-                      setState(() {
-                        btnColor = Color.fromARGB(255, 3, 135, 243);
-                        fileName = (file!.name);
+                        btnText = 'Read Your File';
+                        tempName = file!.name;
                       });
                     },
                     child: Container(
@@ -249,17 +241,10 @@ class _FileChooseViewState extends State<FileChooseView> {
                 GestureDetector(
                   onTap: () async {
                     file = await FileChooseController.getFile(
-                        widget.conName3 == 'TXT' ? 'txt' : 'ogg');
+                    widget.conName3 == 'TXT' ? 'txt' : 'ogg');
                     setState(() {
-                      btnColor = const Color.fromARGB(255, 121, 229, 236);
-                      fileName = 'Reading Your File...';
-                    });
-                    if (widget.conName3=='TXT') {
-                        fileText = await FileChooseController.returnFileText();
-                      }
-                    setState(() {
-                      btnColor = Color.fromARGB(255, 3, 135, 243);
-                      fileName = (file!.name);
+                      btnText = 'Read Your File';
+                      tempName = file!.name;
                     });
                   },
                   child: Container(
@@ -332,15 +317,8 @@ class _FileChooseViewState extends State<FileChooseView> {
                     file = await FileChooseController.getFile(
                         widget.conName4 == 'DOCX' ? 'docx' : 'mpeg');
                     setState(() {
-                      btnColor = const Color.fromARGB(255, 121, 229, 236);
-                      fileName = 'Reading Your File...';
-                    });
-                    if (widget.conName4=='DOCX') {
-                        fileText = await FileChooseController.returnFileText();
-                      }
-                    setState(() {
-                      btnColor = Color.fromARGB(255, 3, 135, 243);
-                      fileName = (file!.name);
+                       btnText = 'Read Your File';
+                      tempName = file!.name;
                     });
                   },
                   child: Container(
@@ -569,40 +547,48 @@ class _FileChooseViewState extends State<FileChooseView> {
             GestureDetector(
               onTap: () async {
                 final translator = GoogleTranslator();
-                if (widget.conName1 == 'MP3' || widget.conName2 == 'WAV' ||widget.conName3 == 'OGG' ||widget.conName4 == 'FLAC') {
-                   Fluttertoast.showToast(
-                    msg: "Please Wait",
-                    toastLength: Toast.LENGTH_LONG,
-                    gravity: ToastGravity.BOTTOM,
-                    backgroundColor: Color.fromARGB(180, 37, 35, 34),
-                    textColor: Colors.white,
-                    fontSize: 16.0);
-                  fileText =await FileChooseController.returnAudioText(radioVal);
-                } 
-                else{
-                   Fluttertoast.showToast(
-                    msg: "Please Wait",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    backgroundColor: Color.fromARGB(180, 37, 35, 34),
-                    textColor: Colors.white,
-                    fontSize: 16.0);
-                }
-                var trans = await translator.translate(fileText, to: 'en');
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => TranslateText(
-                          fileText: fileText,
-                          translationText: trans.toString(),
-                          sourceLang: radioVal,
-                        )));
+                if(btnText == 'Read Your File'){ 
+                  if (widget.conName1 == 'MP3' || widget.conName2 == 'WAV' ||widget.conName3 == 'OGG' ||widget.conName4 == 'FLAC') {
+                    setState(() {
+                      fileName = 'Reading Your File';
+                    });
+                    fileText =await FileChooseController.returnAudioText(radioVal);
+                    setState(() {
+                      fileName = tempName;
+                    });
+                  } 
+                  else{
+                      setState(() {
+                        fileName = 'Reading Your File';
+                      });
+                      fileText = await FileChooseController.returnFileText();
+                       setState(() {
+                        fileName = tempName;
+                      });
+                  }
+                  setState(() {
+                    btnText = 'Translate File';
+                  });
+              }  
+              else{
+                  var trans = await translator.translate(fileText, to: 'en');
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => TranslateText(
+                        fileText: fileText,
+                        translationText: trans.toString(),
+                        sourceLang: radioVal,
+                      )
+                    )
+                  );
+              }
               },
               child: Container(
                 height: 70,
                 width: 170,
                 alignment: Alignment.center,
-                child: const Text(
-                  'Translate File',
-                  style: TextStyle(
+                child: Text(
+                  btnText,
+                  style: const TextStyle(
                     fontFamily: 'Tahoma',
                     fontWeight: FontWeight.w600,
                     fontSize: 20,

@@ -78,7 +78,7 @@ class FileChooseController {
 
     var uri = Uri(
       scheme: 'https',
-      host: '199d-2402-8100-230f-497b-3c17-5556-48d0-561a.ngrok.io',
+      host: 'bf84-106-211-106-40.ngrok.io',
       path: '/audio-upload',
       queryParameters: {
         'language': source.toString()

@@ -23,8 +23,14 @@ class _TranslateTextState extends State<TranslateText> {
   final translator = GoogleTranslator();
   FlutterTts flutterTts = FlutterTts();
   String lang = '';
+  var fileSoundValue = 0;
+  var transSoundValue = 0;
   @override
   void initState() {
+    setState(() {
+      fileSoundValue = 0;
+      transSoundValue = 0;
+    });
     if (widget.sourceLang =='HINDI') {
       setState(() {
         lang = 'hi-IN';
@@ -103,10 +109,20 @@ class _TranslateTextState extends State<TranslateText> {
                               Spacer(),
                               GestureDetector(
                                 onTap: (()async {
-                                  Fluttertoast.showToast(msg: 'Reading will Start Shortly');
-                                  await flutterTts.setLanguage(lang);
-                                  await flutterTts.setPitch(1);
-                                  await flutterTts.speak(widget.fileText);
+                                  if (fileSoundValue ==1) {
+                                    await flutterTts.stop();
+                                     setState(() {
+                                      fileSoundValue = 0;
+                                    });
+                                  } else {
+                                    setState(() {
+                                      fileSoundValue = 1;
+                                    });
+                                    Fluttertoast.showToast(msg: 'Reading will Start Shortly');
+                                    await flutterTts.setLanguage(lang);
+                                    await flutterTts.setPitch(1);
+                                    await flutterTts.speak(widget.fileText);
+                                  }
                                 }),
                                 child: DecoratedIcon(
                                   Icons.volume_up_outlined,
@@ -193,9 +209,20 @@ class _TranslateTextState extends State<TranslateText> {
                               Spacer(),
                               GestureDetector(
                                 onTap: (() async {
-                                  await flutterTts.setLanguage('en-IN');
-                                  await flutterTts.setPitch(1);
-                                  await flutterTts.speak(widget.translationText);
+                                  if (transSoundValue == 1) {
+                                    setState(() {
+                                      transSoundValue = 0;
+                                    });
+                                    await flutterTts.stop();
+                                  }
+                                  else{
+                                    setState(() {
+                                      transSoundValue = 1;
+                                    });
+                                    await flutterTts.setLanguage('en-IN');
+                                    await flutterTts.setPitch(1);
+                                    await flutterTts.speak(widget.translationText);
+                                  }
                                 }),
                                 child: DecoratedIcon(
                                   Icons.volume_up_outlined,
