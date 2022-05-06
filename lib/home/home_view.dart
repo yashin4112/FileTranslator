@@ -10,13 +10,6 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
 
-  // var currentIndex = 0;
-  // var tabwidgets = [
-  //   const FileChooseView(conName1: 'PDF',conName2: 'DOC',conName3:'TXT',conName4: 'DOCX'),
-  //   const FileChooseView(conName1: 'MP3',conName2: 'WAV',conName3:'OGG',conName4: 'MPEG'),
-  //   Container(),
-  // ];
-
   var bgColor = Colors.white;
   var themeIcon = Icons.dark_mode_outlined;
   var themeIconColor = Color.fromARGB(255, 0, 0, 0);
@@ -73,7 +66,6 @@ class _HomeViewState extends State<HomeView> {
         ),
         backgroundColor: appBarColor,
         shadowColor: Color.fromARGB(255, 34, 32, 32),
-        // backgroundColor: Colors.deepPurple.shade400,
       ),
       body: Padding(
         padding: const EdgeInsets.all(5.0),
@@ -81,7 +73,6 @@ class _HomeViewState extends State<HomeView> {
           children: [
             Spacer(),
             Container(
-              // padding: EdgeInsets.all(10),
               width: 530,
               height: 530,
               child: Image.asset(

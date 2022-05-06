@@ -36,6 +36,8 @@ dependencies:
   fluttertoast: ^8.0.9
   flutter_tts: ^3.3.3
   file_saver: ^0.1.0
+  hive: ^2.1.0
+  hive_flutter: ^1.1.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -74,7 +76,7 @@ flutter:
     - assests/txtLogo/.
     - assests/mp3Logo/.
     - assests/wavLogo/.
-    - assests/mpegLogo/.
+    - assests/flacLogo/.
     - assests/oggLogo/.
     - assests/mainLogo/.
 

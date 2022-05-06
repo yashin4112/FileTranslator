@@ -2,7 +2,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:filetranslator/filechoose/controller.dart';
 import 'package:filetranslator/translateText/translate_text.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:translator/translator.dart';
 
 class FileChooseView extends StatefulWidget {
@@ -28,7 +27,6 @@ class _FileChooseViewState extends State<FileChooseView> {
   var pdfColor = Color.fromARGB(215, 214, 60, 60);
   var docColor = Color.fromARGB(212, 69, 184, 238);
   var txtColor = Color.fromARGB(213, 100, 241, 164);
-  // var docxColor = Color.fromARGB(210, 24, 113, 135);
   var docxColor = Color.fromARGB(202, 34, 98, 141);
   var btnColor = Color.fromARGB(255, 121, 229, 236);
   var hiColor = Color.fromARGB(255, 240, 112, 95);
@@ -74,7 +72,7 @@ class _FileChooseViewState extends State<FileChooseView> {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
@@ -87,7 +85,6 @@ class _FileChooseViewState extends State<FileChooseView> {
                       setState(() {
                         btnText = 'Read Your File';
                         tempName = file!.name;
-                        // fileName = 'Reading Your File...';
                     });
                    
                   },
@@ -120,7 +117,6 @@ class _FileChooseViewState extends State<FileChooseView> {
                               0.9,
                               1.0
                             ])),
-                    // color: pdfColor,
                     child: Container(
                       padding: EdgeInsets.all(10),
                       alignment: Alignment.centerLeft,
@@ -130,7 +126,7 @@ class _FileChooseViewState extends State<FileChooseView> {
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         child: Row(
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 7,
                             ),
                             Image.asset(
@@ -139,7 +135,7 @@ class _FileChooseViewState extends State<FileChooseView> {
                                   : 'assests/mp3Logo/mp3Logo.png',
                               fit: BoxFit.contain,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 20,
                             ),
                             Text(
@@ -197,7 +193,6 @@ class _FileChooseViewState extends State<FileChooseView> {
                                 0.9,
                                 1.0
                               ])),
-                      // color: pdfColor,
                       child: Container(
                         padding: EdgeInsets.all(10),
                         alignment: Alignment.centerLeft,
@@ -210,11 +205,11 @@ class _FileChooseViewState extends State<FileChooseView> {
                             children: [
                               Image.asset(
                                 widget.conName2 == 'DOC'
-                                    ? 'assests/docLogo/docLogo.png'
+                                    ? 'assests/docLogo/docLogo2.png'
                                     : 'assests/wavLogo/wavLogo.png',
                                 fit: BoxFit.contain,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 20,
                               ),
                               Text(
@@ -232,7 +227,7 @@ class _FileChooseViewState extends State<FileChooseView> {
                     )),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Row(
@@ -276,7 +271,6 @@ class _FileChooseViewState extends State<FileChooseView> {
                               0.9,
                               1.0
                             ])),
-                    // color: pdfColor,
                     child: Container(
                       padding: EdgeInsets.all(10),
                       alignment: Alignment.centerLeft,
@@ -292,7 +286,7 @@ class _FileChooseViewState extends State<FileChooseView> {
                                   : 'assests/oggLogo/oggLogo.png',
                               fit: BoxFit.contain,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 20,
                             ),
                             Text(
@@ -309,7 +303,7 @@ class _FileChooseViewState extends State<FileChooseView> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 25,
                 ),
                 GestureDetector(
@@ -349,12 +343,9 @@ class _FileChooseViewState extends State<FileChooseView> {
                               0.9,
                               1.0
                             ])),
-                    // color: pdfColor,
                     child: Container(
                       padding: EdgeInsets.all(10),
                       alignment: Alignment.centerLeft,
-                      // height: 30,
-                      // width: 30,
                       child: ClipRRect(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         child: Row(
@@ -362,10 +353,10 @@ class _FileChooseViewState extends State<FileChooseView> {
                             Image.asset(
                               widget.conName4 == 'DOCX'
                                   ? 'assests/docxLogo/docxLogo.png'
-                                  : 'assests/mpegLogo/mpegLogo.png',
+                                  : 'assests/flacLogo/flacLogo.png',
                               fit: BoxFit.contain,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 7,
                             ),
                             Text(
@@ -609,10 +600,6 @@ class _FileChooseViewState extends State<FileChooseView> {
                         begin: Alignment.topLeft,
                         end: Alignment.bottomCenter,
                         colors: [
-                          // Colors.deepOrange.shade100,
-                          // Colors.deepOrange.shade200,
-                          // Colors.deepOrange.shade400,
-                          // Colors.deepOrange.shade400,
                           Colors.blue.shade400,
                           Colors.blue.shade700,
                           Colors.purple.shade500,
